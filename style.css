@@ -1,0 +1,43 @@
+/* Front-end Styling */
+
+.shop_table:before {
+    content: "Equipment Request";
+}
+
+/* Hide various items (mostly involving pricing) */
+#customer_details h3 ,#order_review_heading,.cart-subtotal, .total, .shop_table th, .cart-collaterals,.product-price,.product-subtotal,.product-total, .amount{
+	display:none;
+}
+
+/* Remove header image from single product pages since featured image is used in header */
+.single-product #branding{
+display:none;
+}
+
+/* Remove clear:both from Translucence 2010 to fix product image and summary side by side */
+.entry-summary{
+clear:none;
+}
+
+/* Related items fix */
+.woocommerce .related ul.products li.product, .woocommerce .related ul li.product, .woocommerce .upsells.products ul.products li.product, .woocommerce .upsells.products ul li.product, .woocommerce-page .related ul.products li.product, .woocommerce-page .related ul li.product, .woocommerce-page .upsells.products ul.products li.product, .woocommerce-page .upsells.products ul li.product {
+max-width: 150px;
+} 
+
+/* Datepicker */
+#my_custom_checkout_field{
+width: 49%; 		
+float: left;
+}
+#my_custom_checkout_field2{
+width: 48%; 		
+float: right;
+}
+#my_custom_checkout_field p, #my_custom_checkout_field2 p{
+margin-bottom: 0;
+}
+
+/* Admin Styling */
+#woocommerce-order-totals, #woocommerce-order-downloads, #postcustom{
+display:none;
+}
