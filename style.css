@@ -5,8 +5,8 @@
 }
 
 /* Hide various items (mostly involving pricing) */
-#customer_details h3 ,#order_review_heading,.cart-subtotal, .total, .shop_table th, .cart-collaterals,.product-price,.product-subtotal,.product-total, .amount{
-	display:none;
+#customer_details h3 ,#order_review_heading, .total, .shop_table th, .product-price,.product-subtotal,.product-total, .amount, .cart_totals .cart-subtotal, .cart_totals .shipping, .cart_totals .order-total, .cart_totals h2{
+display:none;
 }
 
 /* Remove header image from single product pages since featured image is used in header */
