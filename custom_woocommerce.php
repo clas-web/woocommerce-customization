@@ -7,6 +7,22 @@
  * Author URI: http://clas-pages.uncc.edu/forsyth
  */
 
+/* Fix Variable Item request button - Only load in frontend */
+if ( ! is_admin() ) {
+	// deregister script
+	wp_deregister_script( 'jquery-cookie' ); 
+
+	add_action( 'wp_enqueue_scripts', 'woocommerce_jquery_cookie_script' );
+
+	function woocommerce_jquery_cookie_script() {
+
+		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+
+		wp_register_script( 'jquery-cookie', plugins_url( 'jquery_cookie' . $suffix . '.js', __FILE__ ), array( 'jquery' ), '1.3.1', true );
+
+	}
+}
+
  /* Add CSS files */
 add_action( 'wp_enqueue_scripts', 'prefix_add_my_stylesheet' );
 add_action('admin_enqueue_scripts', 'prefix_add_my_stylesheet');
