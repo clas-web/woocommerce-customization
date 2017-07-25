@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WooCommerce Customization
  * Description: Customizations to default WooCommerce settings and verbiage.
- * Version: 0.1.2
+ * Version: 0.1.3
  * Author: Aaron Forsyth
  * Author URI: http://clas-pages.uncc.edu/forsyth
  * GitHub Plugin URI: https://github.com/clas-web/woocommerce-customization
