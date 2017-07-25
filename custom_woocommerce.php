@@ -5,6 +5,7 @@
  * Version: 0.1.1
  * Author: Aaron Forsyth
  * Author URI: http://clas-pages.uncc.edu/forsyth
+ * GitHub Plugin URI: https://github.com/clas-web/woocommerce-customization
  */
 
 /* Fix Variable Item request button - Only load in frontend */
