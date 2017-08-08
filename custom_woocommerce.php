@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WooCommerce Customization
  * Description: Customizations to default WooCommerce settings and verbiage.
- * Version: 0.1.3
+ * Version: 0.1.4
  * Author: Aaron Forsyth
  * Author URI: http://clas-pages.uncc.edu/forsyth
  * GitHub Plugin URI: https://github.com/clas-web/woocommerce-customization
@@ -35,9 +35,10 @@ function prefix_add_my_stylesheet() {
 }
 
 /* Add 4 related products to each product page (default is 2) */
-function woocommerce_output_related_products() {
-woocommerce_related_products(4,4); 
-}
+add_filter( 'woocommerce_product_related_posts', 'uncc_4related' );
+	function uncc_4related() {
+		woocommerce_related_products(4,4); 
+	}
 
  /* Hides the 'Free!' price notice */
 add_filter( 'woocommerce_variable_free_price_html',  'hide_free_price_notice' );
@@ -159,7 +160,7 @@ function custom_override_checkout_fields( $fields ) {
 		unset($fields['billing']['billing_address_2']);
 		unset($fields['billing']['billing_city']);
 		unset($fields['billing']['billing_postcode']);
-		unset($fields['billing']['billing_country']);
+		//unset($fields['billing']['billing_country']); Required for checkout.  Hiding with CSS
 		unset($fields['billing']['billing_state']);
 		$fields['billing']['billing_address_1']['label'] = 'Office Location';
 		$fields['billing']['billing_address_1']['placeholder'] = 'Building and Room #';
@@ -219,19 +220,25 @@ function my_custom_checkout_field_update_order_meta2( $order_id ) {
 }
 
 
-/* Override default template location */
-function myplugin_plugin_path() {
-  // gets the absolute path to this plugin directory
-   return untrailingslashit( plugin_dir_path( __FILE__ ) );
- }
- 
+ //Override default template location 
+function woo_template_replace( $located, $template_name, $args, $template_path, $default_path ) {
+if( file_exists( plugin_dir_path(__FILE__) . 'woocommerce/' . $template_name ) ) {
+    $located = plugin_dir_path(__FILE__) . 'woocommerce/' . $template_name;
+}
+return $located;
+}
+
+add_filter( 'wc_get_template' , 'woo_template_replace' , 10 , 5 );
+
+
+
 add_filter( 'woocommerce_locate_template', 'myplugin_woocommerce_locate_template', 10, 3 );
  
 function myplugin_woocommerce_locate_template( $template, $template_name, $template_path ) {
    global $woocommerce;
    $_template = $template;
    if ( ! $template_path ) $template_path = $woocommerce->template_url;
-   $plugin_path  = myplugin_plugin_path() . '/';
+   $plugin_path  = untrailingslashit( plugin_dir_path( __FILE__ ) ) . '/woocommerce/';
   
   // Look within passed path within the theme - this is priority
    $template = locate_template(

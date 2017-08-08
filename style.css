@@ -1,43 +1,65 @@
-/* Front-end Styling */
+body.woocommerce .page-title {
+	display:none;
+}
 
-.shop_table:before {
-    content: "Equipment Request";
+body.woocommerce h1.page-title {
+	display:block;
+}
+
+body.woocommerce #content .page-title {
+	border-bottom:solid 1px #ccc;
 }
 
 /* Hide various items (mostly involving pricing) */
-#customer_details h3 ,#order_review_heading, .total, .shop_table th, .product-price,.product-subtotal,.product-total, .amount, .cart_totals .cart-subtotal, .cart_totals .shipping, .cart_totals .order-total, .cart_totals h2{
-display:none;
+#customer_details h3,
+#order_review_heading,
+#billing_country_field,
+.total,
+.shop_table th,
+.product-price,
+.product-subtotal,
+.product-total,
+.amount,
+.cart_totals
+.cart-subtotal,
+.cart_totals .shipping,
+.cart_totals .order-total,
+.cart_totals h2 {
+	display:none;
 }
 
 /* Remove header image from single product pages since featured image is used in header */
 .single-product #branding{
-display:none;
-}
-
-/* Remove clear:both from Translucence 2010 to fix product image and summary side by side */
-.entry-summary{
-clear:none;
+	display:none;
 }
 
 /* Related items fix */
-.woocommerce .related ul.products li.product, .woocommerce .related ul li.product, .woocommerce .upsells.products ul.products li.product, .woocommerce .upsells.products ul li.product, .woocommerce-page .related ul.products li.product, .woocommerce-page .related ul li.product, .woocommerce-page .upsells.products ul.products li.product, .woocommerce-page .upsells.products ul li.product {
-max-width: 150px;
+.woocommerce .related ul.products li.product,
+.woocommerce .related ul li.product,
+.woocommerce .upsells.products ul.products li.product,
+.woocommerce .upsells.products ul li.product,
+.woocommerce-page .related ul.products li.product,
+.woocommerce-page .related ul li.product,
+.woocommerce-page .upsells.products ul.products li.product,
+.woocommerce-page .upsells.products ul li.product {
+	max-width: 200px;
+}
+.related{
+	clear:both;
 } 
 
 /* Datepicker */
-#my_custom_checkout_field{
-width: 49%; 		
-float: left;
-}
-#my_custom_checkout_field2{
-width: 48%; 		
-float: right;
-}
-#my_custom_checkout_field p, #my_custom_checkout_field2 p{
-margin-bottom: 0;
+#my_custom_checkout_field {
+	width: 49%;
+	float: left;
 }
 
-/* Admin Styling */
-#woocommerce-order-totals, #woocommerce-order-downloads, #postcustom{
-display:none;
+#my_custom_checkout_field2 {
+	width: 48%;
+	float: right;
+}
+
+#my_custom_checkout_field p,
+#my_custom_checkout_field2 p {
+	margin-bottom: 0;
 }
