@@ -12,15 +12,11 @@
 if ( ! is_admin() ) {
 	// deregister script
 	wp_deregister_script( 'jquery-cookie' ); 
-
 	add_action( 'wp_enqueue_scripts', 'woocommerce_jquery_cookie_script' );
-
+	
 	function woocommerce_jquery_cookie_script() {
-
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-
 		wp_register_script( 'jquery-cookie', plugins_url( 'jquery_cookie' . $suffix . '.js', __FILE__ ), array( 'jquery' ), '1.3.1', true );
-
 	}
 }
 
@@ -54,12 +50,7 @@ wp_enqueue_script('add-to-cart-variation', plugins_url() . '/woocommerce/assets/
 }
 add_action('wp_enqueue_scripts','mv_my_theme_scripts');
 
-/* Skip checkout page 
-add_filter('add_to_cart_redirect', 'custom_add_to_cart_redirect');
-function custom_add_to_cart_redirect() {
-return get_permalink(get_option('woocommerce_checkout_page_id'));
-}
-*/
+
 /* Change add to cart text */
 add_filter('variable_add_to_cart_text', 'woo_custom_cart_button_text');
 add_filter('single_add_to_cart_text', 'woo_custom_cart_button_text'); 
@@ -220,25 +211,14 @@ function my_custom_checkout_field_update_order_meta2( $order_id ) {
 }
 
 
- //Override default template location 
-function woo_template_replace( $located, $template_name, $args, $template_path, $default_path ) {
-if( file_exists( plugin_dir_path(__FILE__) . 'woocommerce/' . $template_name ) ) {
-    $located = plugin_dir_path(__FILE__) . 'woocommerce/' . $template_name;
-}
-return $located;
-}
-
-add_filter( 'wc_get_template' , 'woo_template_replace' , 10 , 5 );
-
-
-
+//Email templates in plugin
 add_filter( 'woocommerce_locate_template', 'myplugin_woocommerce_locate_template', 10, 3 );
  
 function myplugin_woocommerce_locate_template( $template, $template_name, $template_path ) {
    global $woocommerce;
    $_template = $template;
    if ( ! $template_path ) $template_path = $woocommerce->template_url;
-   $plugin_path  = untrailingslashit( plugin_dir_path( __FILE__ ) ) . '/woocommerce/';
+   $plugin_path  = plugin_dir_path( __FILE__ );
   
   // Look within passed path within the theme - this is priority
    $template = locate_template(
@@ -257,4 +237,23 @@ function myplugin_woocommerce_locate_template( $template, $template_name, $templ
    // Return what we found
    return $template;
  }
+
+ 
+//Use custom templates from the plugin
+add_filter( 'template_include', 'rc_tc_template_chooser',99 );
+
+function rc_tc_template_chooser( $template ) {
+ echo($template);
+    $template_file = basename($template);
+	if(file_exists(plugin_dir_path( __FILE__ ). 'woocommerce/'.$template_file)){
+        $template = plugin_dir_path( __FILE__ ). 'woocommerce/'.$template_file;
+    }
+    return $template;
+}
+
+//Dismisses WooCommerce warning about theme support
+add_action( 'after_setup_theme', 'woocommerce_support' );
+function woocommerce_support() {
+    add_theme_support( 'woocommerce' );
+}
 ?>
