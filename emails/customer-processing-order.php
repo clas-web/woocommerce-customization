@@ -42,15 +42,13 @@ do_action( 'woocommerce_email_order_details', $order, $sent_to_admin, $plain_tex
  */
 do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text, $email );
 
-<h2><?php _e( 'Faculty/Staff Information', 'woocommerce' ); ?></h2>
-<?php wc_get_template( 'emails/email-addresses.php', array( 'order' => $order ) ); ?>
-<?php if ($order->billing_email) : ?>
-<p><strong><?php _e( 'Email:', 'woocommerce' ); ?></strong> <?php echo $order->billing_email; ?></p>
-<?php endif; ?>
-<?php if ($order->billing_phone) : ?>
-<p><strong><?php _e( 'Tel:', 'woocommerce' ); ?></strong> <?php echo $order->billing_phone; ?></p>
-<?php endif; ?>
+/**
+ * @hooked WC_Emails::customer_details() Shows customer details
+ * @hooked WC_Emails::email_address() Shows email address
+ */
+do_action( 'woocommerce_email_customer_details', $order, $sent_to_admin, $plain_text, $email );
 
-
-
-<?php do_action( 'woocommerce_email_footer' ); ?>
+/**
+ * @hooked WC_Emails::email_footer() Output the email footer
+ */
+do_action( 'woocommerce_email_footer', $email );
