@@ -63,13 +63,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	
 <div id="main-wrapper" clas="clearfix">
 	<div id="main">
-<?php
-	echo '<div id="full-menu">';
-	vtt_get_template_part( 'header-menu', 'part', vtt_get_queried_object_type() );
-	vtt_get_template_part( 'sidebar-left', 'part', vtt_get_queried_object_type() );
-	vtt_get_template_part( 'sidebar-right', 'part', vtt_get_queried_object_type() );
-	echo '</div>';
-	?>
+	<?php	vtt_get_template_part( 'main', 'part', vtt_get_queried_object_type() );	?>
 	<?php
 		/**
 		 * woocommerce_before_main_content hook.
