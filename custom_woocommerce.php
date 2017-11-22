@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WooCommerce Customization
  * Description: Customizations to default WooCommerce settings and verbiage.
- * Version: 0.1.5
+ * Version: 0.1.6
  * Author: Aaron Forsyth
  * Author URI: http://clas-pages.uncc.edu/forsyth
  * GitHub Plugin URI: https://github.com/clas-web/woocommerce-customization
@@ -243,7 +243,7 @@ function myplugin_woocommerce_locate_template( $template, $template_name, $templ
 add_filter( 'template_include', 'rc_tc_template_chooser',99 );
 
 function rc_tc_template_chooser( $template ) {
- echo($template);
+// echo($template);
     $template_file = basename($template);
 	if(file_exists(plugin_dir_path( __FILE__ ). 'woocommerce/'.$template_file)){
         $template = plugin_dir_path( __FILE__ ). 'woocommerce/'.$template_file;
